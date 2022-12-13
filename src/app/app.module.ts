@@ -7,6 +7,7 @@ import {InputModule} from "carbon-components-angular";
 import { EmptyComponent } from './layouts/empty/empty.component';
 import { FullComponent } from './layouts/full/full.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        InputModule
+        InputModule,
+        StoreModule.forRoot({}, {})
     ],
   providers: [],
   bootstrap: [AppComponent]
