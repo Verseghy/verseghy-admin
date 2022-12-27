@@ -5,7 +5,7 @@ import { AdminRoutingModule } from './admin-routing.module'
 import { DashboardComponent } from './components/dashboard/dashboard.component'
 
 @NgModule({
-    declarations: [DashboardComponent],
-    imports: [CommonModule, AdminRoutingModule],
+  declarations: [DashboardComponent],
+  imports: [CommonModule, AdminRoutingModule],
 })
 export default class AdminModule {}

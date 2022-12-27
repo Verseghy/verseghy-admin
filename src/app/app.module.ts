@@ -10,19 +10,19 @@ import { NotFoundComponent } from './components/not-found/not-found.component'
 import { StoreModule } from '@ngrx/store'
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        EmptyComponent,
-        FullComponent,
-        NotFoundComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        InputModule,
-        StoreModule.forRoot({}, {}),
-    ],
-    providers: [],
-    bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    EmptyComponent,
+    FullComponent,
+    NotFoundComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    InputModule,
+    StoreModule.forRoot({}, {}),
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
