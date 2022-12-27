@@ -1,1 +1,28 @@
-<p>login works!</p>
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <ibm-inline-notification
+    *ngIf="error$ | async as error"
+    [notificationObj]="{
+      type: 'error',
+      title: error
+    }"
+    (close)="loginError(null)"
+  >
+    error$
+  </ibm-inline-notification>
+  <ibm-label>
+    Email
+    <input ibmText formControlName="email" />
+  </ibm-label>
+  <ibm-label>
+    Password
+    <input ibmText type="password" formControlName="password" />
+  </ibm-label>
+  <button
+    *ngIf="(loading$ | async) === false"
+    ibmButton="primary"
+    type="submit"
+  >
+    Login
+  </button>
+  <ibm-inline-loading *ngIf="(loading$ | async) === true"></ibm-inline-loading>
+</form>

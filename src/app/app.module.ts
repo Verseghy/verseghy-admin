@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { NgModule, isDevMode } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -8,6 +8,9 @@ import { EmptyComponent } from './layouts/empty/empty.component'
 import { FullComponent } from './layouts/full/full.component'
 import { NotFoundComponent } from './components/not-found/not-found.component'
 import { StoreModule } from '@ngrx/store'
+import { EffectsModule } from '@ngrx/effects'
+import { HttpClientModule } from '@angular/common/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { StoreModule } from '@ngrx/store'
     AppRoutingModule,
     InputModule,
     StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    HttpClientModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
   bootstrap: [AppComponent],
