@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "extract-i18n": "ng extract-i18n --out-file src/locale/messages.xliff --format=xliff",
     "test": "ng test",
     "lint": "ng lint"
   },
@@ -40,6 +40,8 @@
     "@angular-eslint/template-parser": "15.1.0",
     "@angular/cli": "~15.0.3",
     "@angular/compiler-cli": "^15.0.0",
+    "@angular/localize": "^15.0.3",
+    "@ngrx/eslint-plugin": "^15.1.0",
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
@@ -53,7 +55,6 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "prettier": "^2.8.1",
-    "typescript": "~4.8.2",
-    "@ngrx/eslint-plugin": "^15.1.0"
+    "typescript": "~4.8.2"
   }
 }

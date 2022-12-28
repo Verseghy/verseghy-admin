@@ -54,7 +54,8 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "localize": true
             },
             "development": {
               "buildOptimizer": false,
@@ -62,7 +63,8 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "localize": false
             }
           },
           "defaultConfiguration": "production"
@@ -111,6 +113,14 @@
               "src/**/*.ts",
               "src/**/*.html"
             ]
+          }
+        }
+      },
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "hu": {
+            "translation": "src/locale/hu/messages.xliff"
           }
         }
       }

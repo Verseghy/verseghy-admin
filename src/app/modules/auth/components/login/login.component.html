@@ -10,11 +10,11 @@
     error$
   </ibm-inline-notification>
   <ibm-label>
-    Email
+    <ng-container i18n>Email</ng-container>
     <input ibmText formControlName="email" />
   </ibm-label>
   <ibm-label>
-    Password
+    <ng-container i18n>Password</ng-container>
     <input ibmText type="password" formControlName="password" />
   </ibm-label>
   <button
@@ -22,7 +22,7 @@
     ibmButton="primary"
     type="submit"
   >
-    Login
+    <ng-container i18n>Login</ng-container>
   </button>
   <ibm-inline-loading *ngIf="(loading$ | async) === true"></ibm-inline-loading>
 </form>

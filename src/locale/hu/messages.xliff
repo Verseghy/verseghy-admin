@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="hu">
+    <body>
+      <trans-unit id="4768749765465246664" datatype="html">
+        <source>Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <target state="translated">Email</target>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <target state="translated">Jelszó</target>
+      </trans-unit>
+      <trans-unit id="2454050363478003966" datatype="html">
+        <source>Login</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <target state="translated">Bejelentkezés</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
