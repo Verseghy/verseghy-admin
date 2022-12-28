@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
 import { Observable } from 'rxjs'
 
-// TODO: implement this
 @Injectable({
   providedIn: 'root',
 })
 export class RedirectToLoginGuard implements CanActivate {
+  constructor(private router: Router) {}
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -20,6 +22,9 @@ export class RedirectToLoginGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return true
+    if (localStorage.getItem('token')) {
+      return true
+    }
+    return this.router.createUrlTree(['/'])
   }
 }

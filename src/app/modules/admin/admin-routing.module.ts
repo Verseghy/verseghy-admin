@@ -8,6 +8,10 @@ const routes: Routes = [
     component: DashboardComponent,
   },
   {
+    path: 'users',
+    loadComponent: () => import('./modules/users/users.module'),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },

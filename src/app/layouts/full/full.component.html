@@ -1,2 +1,20 @@
-<p>full</p>
-<router-outlet></router-outlet>
+<ibm-header brand="Verseghy" name="Admin" ibmTheme="g90">
+  <ibm-hamburger
+    [active]="hamburgerActive"
+    (selected)="hamburgerActive = !hamburgerActive"
+  ></ibm-hamburger>
+  <ibm-header-global>
+    <ibm-header-action title="logout" (activeChange)="logout()">
+      <svg ibmIcon="user" size="16"></svg>
+    </ibm-header-action>
+  </ibm-header-global>
+  <ibm-sidenav [expanded]="hamburgerActive" [rail]="true">
+    <ibm-sidenav-item>
+      <svg ibmIcon="user" size="16"></svg>
+      Users
+    </ibm-sidenav-item>
+  </ibm-sidenav>
+</ibm-header>
+<main class="main">
+  <router-outlet></router-outlet>
+</main>
