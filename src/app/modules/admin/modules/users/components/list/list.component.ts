@@ -1,6 +1,19 @@
 import { Component } from '@angular/core'
 import { UserService } from '../../services/user.service'
-import { Table } from 'carbon-components-angular'
+import {
+  IconService,
+  TableHeaderItem,
+  TableModel,
+} from 'carbon-components-angular'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { TrashCan16 } from '@carbon/icons'
+
+const headers = [
+  new TableHeaderItem({ data: $localize`ID` }),
+  new TableHeaderItem({ data: $localize`Name` }),
+  new TableHeaderItem({ data: $localize`Email` }),
+]
 
 @Component({
   selector: 'app-list',
@@ -9,8 +22,13 @@ import { Table } from 'carbon-components-angular'
 })
 export class ListComponent {
   users$ = this.userService.getAll()
-  loading$ = this.userService.loading$
-  skeletonModel = Table.skeletonModel(25, 5)
+  model = new TableModel()
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private iconService: IconService
+  ) {
+    this.iconService.registerAll([TrashCan16])
+    this.model.header = headers
+  }
 }

@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
+    "@carbon/icons": "^11.13.0",
     "@carbon/styles": "^1.19.0",
     "@ngrx/component-store": "^15.1.0",
     "@ngrx/data": "^15.1.0",
@@ -46,6 +47,7 @@
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
+    "autoprefixer": "^10.4.13",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -55,7 +57,9 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "postcss": "^8.4.20",
     "prettier": "^2.8.1",
+    "tailwindcss": "^3.2.4",
     "typescript": "~4.8.2"
   }
 }
