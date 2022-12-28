@@ -15,8 +15,15 @@ import { FullComponent } from './layouts/full/full.component'
 import { NotFoundComponent } from './components/not-found/not-found.component'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data'
+import { entityConfig } from './entity-metadata'
+import { AuthorizationInterceptor } from './interceptors/authorization.interceptor'
+
+const defaultDataServiceConfig: DefaultDataServiceConfig = {
+  root: 'https://iam.verseghy-gimnazium.net/v1/',
+}
 
 @NgModule({
   declarations: [
@@ -37,8 +44,16 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
     ThemeModule,
     IconModule,
     SideNavModule,
+    EntityDataModule.forRoot(entityConfig),
   ],
-  providers: [],
+  providers: [
+    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

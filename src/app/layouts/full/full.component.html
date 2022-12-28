@@ -9,9 +9,16 @@
     </ibm-header-action>
   </ibm-header-global>
   <ibm-sidenav [expanded]="hamburgerActive" [rail]="true">
-    <ibm-sidenav-item>
+    <ibm-sidenav-item
+      [route]="['/admin/dashboard']"
+      [active]="(url$ | async) === '/admin/dashboard'"
+    >
+      <svg ibmIcon="dashboard" size="16"></svg>
+      <ng-container i18n>Dashboard</ng-container>
+    </ibm-sidenav-item>
+    <ibm-sidenav-item [route]="['/admin/users']" [active]="(url$ | async) === '/admin/users'">
       <svg ibmIcon="user" size="16"></svg>
-      Users
+      <ng-container i18n>Users</ng-container>
     </ibm-sidenav-item>
   </ibm-sidenav>
 </ibm-header>

@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    loadComponent: () => import('./modules/users/users.module'),
+    loadChildren: () => import('./modules/users/users.module'),
   },
   {
     path: '**',
