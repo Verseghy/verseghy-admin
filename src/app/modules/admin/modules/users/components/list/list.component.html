@@ -1,5 +1,5 @@
 <h1 i18n class="mb-8">Users</h1>
-<ibm-table-toolbar [model]="model" #toolbar>
+<ibm-table-toolbar [model]="(model$ | async) ?? emptyTableModel" #toolbar>
   <ibm-table-toolbar-actions>
     <button ibmButton="primary">
       <ng-container i18n>Delete</ng-container>
@@ -12,7 +12,7 @@
     </button>
   </ibm-table-toolbar-content>
 </ibm-table-toolbar>
-<ibm-table [model]="model">
+<ibm-table [model]="(model$ | async) ?? emptyTableModel">
   <tbody>
     <tr>
       <td colspan="4"><div class="text-center" i18n>No data</div></td>
