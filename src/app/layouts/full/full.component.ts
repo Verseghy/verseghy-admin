@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { IconService } from 'carbon-components-angular'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { User16, Dashboard16, Interactions16, Group16 } from '@carbon/icons'
+import {
+  User16,
+  Dashboard16,
+  Interactions16,
+  Group16,
+  Application16,
+} from '@carbon/icons'
 import { NavigationEnd, Router } from '@angular/router'
 import { filter, map, mergeWith, Observable, of } from 'rxjs'
 import { actions } from '../../models/actions'
@@ -25,13 +31,25 @@ export class FullComponent {
     )
   )
   actions = actions
+  iamActions = [
+    ...actions.ACTIONS,
+    ...actions.APP,
+    ...actions.USERS,
+    ...actions.GROUPS,
+  ]
 
   constructor(
     private iconService: IconService,
     private router: Router,
     private haveAction: HaveActionService
   ) {
-    this.iconService.registerAll([User16, Dashboard16, Interactions16, Group16])
+    this.iconService.registerAll([
+      User16,
+      Dashboard16,
+      Interactions16,
+      Group16,
+      Application16,
+    ])
   }
 
   logout() {

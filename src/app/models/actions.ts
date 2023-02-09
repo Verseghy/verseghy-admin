@@ -26,6 +26,13 @@ export const actions = {
     'iam.group.update',
     'iam.group.delete',
   ],
+  APP: [
+    'iam.app.add',
+    'iam.app.get',
+    'iam.app.list',
+    'iam.app.update',
+    'iam.app.delete',
+  ],
 }
 
 export function getAllAvailableActions(): string[] {

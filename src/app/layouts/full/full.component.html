@@ -8,7 +8,7 @@
       <svg ibmIcon="user" size="16"></svg>
     </ibm-header-action>
   </ibm-header-global>
-  <ibm-sidenav [expanded]="hamburgerActive" [rail]="true">
+  <ibm-sidenav [expanded]="hamburgerActive" [rail]="true" class="sidenav">
     <ibm-sidenav-item
       [route]="['/admin/dashboard']"
       [active]="(url$ | async) === '/admin/dashboard'"
@@ -16,30 +16,44 @@
       <svg ibmIcon="dashboard" size="16"></svg>
       <ng-container i18n>Dashboard</ng-container>
     </ibm-sidenav-item>
-    <ibm-sidenav-item
-      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
-      [route]="['/admin/users']"
-      [active]="(url$ | async) === '/admin/users'"
+    <ibm-sidenav-menu
+      *ngIf="haveEitherAction({ actions: iamActions }) | async"
+      title="IAM"
     >
-      <svg ibmIcon="user" size="16"></svg>
-      <ng-container i18n>Users</ng-container>
-    </ibm-sidenav-item>
-    <ibm-sidenav-item
-      *ngIf="haveEitherAction({ actions: actions.ACTIONS }) | async"
-      [route]="['/admin/actions']"
-      [active]="(url$ | async) === '/admin/actions'"
-    >
-      <svg ibmIcon="interactions" size="16"></svg>
-      <ng-container i18n>Actions</ng-container>
-    </ibm-sidenav-item>
-    <ibm-sidenav-item
-      *ngIf="haveEitherAction({ actions: actions.GROUPS }) | async"
-      [route]="['/admin/groups']"
-      [active]="(url$ | async) === '/admin/groups'"
-    >
-      <svg ibmIcon="group" size="16"></svg>
-      <ng-container i18n>Groups</ng-container>
-    </ibm-sidenav-item>
+      <svg ibmIcon="user" size="16" icon></svg>
+      <ibm-sidenav-item
+        *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
+        [route]="['/admin/users']"
+        [active]="(url$ | async) === '/admin/users'"
+      >
+        <svg ibmIcon="user" size="16"></svg>
+        <ng-container i18n>Users</ng-container>
+      </ibm-sidenav-item>
+      <ibm-sidenav-item
+        *ngIf="haveEitherAction({ actions: actions.ACTIONS }) | async"
+        [route]="['/admin/actions']"
+        [active]="(url$ | async) === '/admin/actions'"
+      >
+        <svg ibmIcon="interactions" size="16"></svg>
+        <ng-container i18n>Actions</ng-container>
+      </ibm-sidenav-item>
+      <ibm-sidenav-item
+        *ngIf="haveEitherAction({ actions: actions.GROUPS }) | async"
+        [route]="['/admin/groups']"
+        [active]="(url$ | async) === '/admin/groups'"
+      >
+        <svg ibmIcon="group" size="16"></svg>
+        <ng-container i18n>Groups</ng-container>
+      </ibm-sidenav-item>
+      <ibm-sidenav-item
+        *ngIf="haveEitherAction({ actions: actions.APP }) | async"
+        [route]="['/admin/apps']"
+        [active]="(url$ | async) === '/admin/apps'"
+      >
+        <svg ibmIcon="application" size="16"></svg>
+        <ng-container i18n>Apps</ng-container>
+      </ibm-sidenav-item>
+    </ibm-sidenav-menu>
   </ibm-sidenav>
 </ibm-header>
 <main class="main">

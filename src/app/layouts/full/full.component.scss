@@ -3,3 +3,7 @@
   margin-left: 3rem;
   padding: 3rem;
 }
+
+.sidenav ::ng-deep nav {
+  height: 100%;
+}
