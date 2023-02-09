@@ -12,6 +12,13 @@ export const actions = {
     'iam.user.update',
     'iam.user.delete',
   ],
+  ACTIONS: [
+    'iam.action.add',
+    'iam.action.get',
+    'iam.action.list',
+    'iam.action.update',
+    'iam.action.delete',
+  ],
 }
 
 export function getAllAvailableActions(): string[] {

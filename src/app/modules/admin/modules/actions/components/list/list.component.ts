@@ -10,12 +10,12 @@ import {
 // @ts-ignore
 import { TrashCan16 } from '@carbon/icons'
 import { map } from 'rxjs'
-import { UserService } from '../../services/user.service'
+import { ActionService } from '../../services/action.service'
 
 const headers = [
   new TableHeaderItem({ data: $localize`ID` }),
   new TableHeaderItem({ data: $localize`Name` }),
-  new TableHeaderItem({ data: $localize`2FA Required` }),
+  new TableHeaderItem({ data: $localize`Email` }),
 ]
 
 @Component({
@@ -25,7 +25,7 @@ const headers = [
 })
 export class ListComponent implements OnInit {
   emptyTableModel = new TableModel()
-  model$ = this.userService.entities$.pipe(
+  model$ = this.actionService.entities$.pipe(
     map((users) => {
       const model = new TableModel()
       model.header = headers
@@ -46,13 +46,13 @@ export class ListComponent implements OnInit {
   )
 
   constructor(
-    private userService: UserService,
+    private actionService: ActionService,
     private iconService: IconService
   ) {
     this.iconService.registerAll([TrashCan16])
   }
 
   ngOnInit() {
-    this.userService.getAll()
+    this.actionService.getAll()
   }
 }

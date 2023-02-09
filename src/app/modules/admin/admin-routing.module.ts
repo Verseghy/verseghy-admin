@@ -15,6 +15,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/users/users.module'),
   },
   {
+    path: 'actions',
+    canActivate: [haveEitherActions({ actions: actions.ACTIONS })],
+    loadChildren: () => import('./modules/actions/actions.module'),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },

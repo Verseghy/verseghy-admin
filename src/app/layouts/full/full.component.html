@@ -25,52 +25,12 @@
       <ng-container i18n>Users</ng-container>
     </ibm-sidenav-item>
     <ibm-sidenav-item
-      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
-      [route]="['/admin/users']"
-      [active]="(url$ | async) === '/admin/users'"
+      *ngIf="haveEitherAction({ actions: actions.ACTIONS }) | async"
+      [route]="['/admin/actions']"
+      [active]="(url$ | async) === '/admin/actions'"
     >
-      <svg ibmIcon="user" size="16"></svg>
-      <ng-container i18n>Users</ng-container>
-    </ibm-sidenav-item>
-    <ibm-sidenav-item
-      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
-      [route]="['/admin/users']"
-      [active]="(url$ | async) === '/admin/users'"
-    >
-      <svg ibmIcon="user" size="16"></svg>
-      <ng-container i18n>Users</ng-container>
-    </ibm-sidenav-item>
-    <ibm-sidenav-item
-      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
-      [route]="['/admin/users']"
-      [active]="(url$ | async) === '/admin/users'"
-    >
-      <svg ibmIcon="user" size="16"></svg>
-      <ng-container i18n>Users</ng-container>
-    </ibm-sidenav-item>
-    <ibm-sidenav-item
-      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
-      [route]="['/admin/users']"
-      [active]="(url$ | async) === '/admin/users'"
-    >
-      <svg ibmIcon="user" size="16"></svg>
-      <ng-container i18n>Users</ng-container>
-    </ibm-sidenav-item>
-    <ibm-sidenav-item
-      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
-      [route]="['/admin/users']"
-      [active]="(url$ | async) === '/admin/users'"
-    >
-      <svg ibmIcon="user" size="16"></svg>
-      <ng-container i18n>Users</ng-container>
-    </ibm-sidenav-item>
-    <ibm-sidenav-item
-      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
-      [route]="['/admin/users']"
-      [active]="(url$ | async) === '/admin/users'"
-    >
-      <svg ibmIcon="user" size="16"></svg>
-      <ng-container i18n>Users</ng-container>
+      <svg ibmIcon="interactions" size="16"></svg>
+      <ng-container i18n>Actions</ng-container>
     </ibm-sidenav-item>
   </ibm-sidenav>
 </ibm-header>
