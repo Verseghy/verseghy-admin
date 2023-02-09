@@ -4,7 +4,9 @@ import { IconService } from 'carbon-components-angular'
 // @ts-ignore
 import { User16, Dashboard16 } from '@carbon/icons'
 import { NavigationEnd, Router } from '@angular/router'
-import { filter, map, mergeWith, of } from 'rxjs'
+import { filter, map, mergeWith, Observable, of } from 'rxjs'
+import { actions } from '../../models/actions'
+import { HaveActionService } from '../../services/have-action.service'
 
 @Component({
   selector: 'app-full',
@@ -22,13 +24,22 @@ export class FullComponent {
       )
     )
   )
+  actions = actions
 
-  constructor(private iconService: IconService, private router: Router) {
+  constructor(
+    private iconService: IconService,
+    private router: Router,
+    private haveAction: HaveActionService
+  ) {
     this.iconService.registerAll([User16, Dashboard16])
   }
 
   logout() {
     localStorage.removeItem('token')
     this.router.navigate(['/'])
+  }
+
+  haveEitherAction({ actions }: { actions: string[] }): Observable<boolean> {
+    return this.haveAction.haveEitherAction({ actions })
   }
 }

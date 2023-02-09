@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { ComponentStore, tapResponse } from '@ngrx/component-store'
 import { FormControl, FormGroup } from '@angular/forms'
-import { exhaustMap, Observable, tap } from 'rxjs'
+import { exhaustMap, map, Observable, switchMap, tap } from 'rxjs'
 import { AuthService } from '../../services/auth.service'
 import { BackendError } from '../../../../models/error'
 import { Router } from '@angular/router'
 import { HttpErrorResponse } from '@angular/common/http'
+import { HaveActionService } from '../../../../services/have-action.service'
+import { getAllAvailableActions } from '../../../../models/actions'
 
 interface State {
   loading: boolean
@@ -64,13 +66,27 @@ export class LoginComponent {
           })
           .pipe(
             tapResponse(
-              (resp) => {
-                localStorage.setItem('token', resp.token)
-                this.router.navigate(['/admin/dashboard'])
-                return this.successLogin()
-              },
+              () => undefined,
               (err: HttpErrorResponse) => this.loginError(err.error)
-            )
+            ),
+            switchMap((resp) => {
+              localStorage.setItem('token', resp.token)
+              return this.haveActionService
+                .haveEitherAction({ actions: getAllAvailableActions() })
+                .pipe(
+                  tapResponse(
+                    () => undefined,
+                    (err: HttpErrorResponse) => this.loginError(err.error)
+                  ),
+                  map((shouldAllow) => {
+                    if (!shouldAllow) {
+                      return this.loginError({ error: 'No permissions' }) // TODO: something nicer?
+                    }
+                    this.router.navigate(['/admin/dashboard'])
+                    return this.successLogin()
+                  })
+                )
+            })
           )
       )
     )
@@ -79,7 +95,8 @@ export class LoginComponent {
   constructor(
     private cStore: ComponentStore<State>,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private haveActionService: HaveActionService
   ) {
     this.cStore.setState({
       loading: false,

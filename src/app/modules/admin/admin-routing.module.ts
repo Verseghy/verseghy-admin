@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { DashboardComponent } from './components/dashboard/dashboard.component'
+import { haveEitherActions } from '../../guards/have-either-actions.guard'
+import { actions } from '../../models/actions'
 
 const routes: Routes = [
   {
@@ -9,6 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'users',
+    canActivate: [haveEitherActions({ actions: actions.USERS })],
     loadChildren: () => import('./modules/users/users.module'),
   },
   {

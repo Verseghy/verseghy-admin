@@ -17,6 +17,55 @@
       <ng-container i18n>Dashboard</ng-container>
     </ibm-sidenav-item>
     <ibm-sidenav-item
+      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
+      [route]="['/admin/users']"
+      [active]="(url$ | async) === '/admin/users'"
+    >
+      <svg ibmIcon="user" size="16"></svg>
+      <ng-container i18n>Users</ng-container>
+    </ibm-sidenav-item>
+    <ibm-sidenav-item
+      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
+      [route]="['/admin/users']"
+      [active]="(url$ | async) === '/admin/users'"
+    >
+      <svg ibmIcon="user" size="16"></svg>
+      <ng-container i18n>Users</ng-container>
+    </ibm-sidenav-item>
+    <ibm-sidenav-item
+      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
+      [route]="['/admin/users']"
+      [active]="(url$ | async) === '/admin/users'"
+    >
+      <svg ibmIcon="user" size="16"></svg>
+      <ng-container i18n>Users</ng-container>
+    </ibm-sidenav-item>
+    <ibm-sidenav-item
+      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
+      [route]="['/admin/users']"
+      [active]="(url$ | async) === '/admin/users'"
+    >
+      <svg ibmIcon="user" size="16"></svg>
+      <ng-container i18n>Users</ng-container>
+    </ibm-sidenav-item>
+    <ibm-sidenav-item
+      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
+      [route]="['/admin/users']"
+      [active]="(url$ | async) === '/admin/users'"
+    >
+      <svg ibmIcon="user" size="16"></svg>
+      <ng-container i18n>Users</ng-container>
+    </ibm-sidenav-item>
+    <ibm-sidenav-item
+      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
+      [route]="['/admin/users']"
+      [active]="(url$ | async) === '/admin/users'"
+    >
+      <svg ibmIcon="user" size="16"></svg>
+      <ng-container i18n>Users</ng-container>
+    </ibm-sidenav-item>
+    <ibm-sidenav-item
+      *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
       [route]="['/admin/users']"
       [active]="(url$ | async) === '/admin/users'"
     >
