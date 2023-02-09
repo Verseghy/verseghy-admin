@@ -32,6 +32,14 @@
       <svg ibmIcon="interactions" size="16"></svg>
       <ng-container i18n>Actions</ng-container>
     </ibm-sidenav-item>
+    <ibm-sidenav-item
+      *ngIf="haveEitherAction({ actions: actions.GROUPS }) | async"
+      [route]="['/admin/groups']"
+      [active]="(url$ | async) === '/admin/groups'"
+    >
+      <svg ibmIcon="group" size="16"></svg>
+      <ng-container i18n>Groups</ng-container>
+    </ibm-sidenav-item>
   </ibm-sidenav>
 </ibm-header>
 <main class="main">

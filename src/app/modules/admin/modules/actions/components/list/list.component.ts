@@ -15,7 +15,7 @@ import { ActionService } from '../../services/action.service'
 const headers = [
   new TableHeaderItem({ data: $localize`ID` }),
   new TableHeaderItem({ data: $localize`Name` }),
-  new TableHeaderItem({ data: $localize`Email` }),
+  new TableHeaderItem({ data: $localize`2FA Required` }),
 ]
 
 @Component({
@@ -26,17 +26,17 @@ const headers = [
 export class ListComponent implements OnInit {
   emptyTableModel = new TableModel()
   model$ = this.actionService.entities$.pipe(
-    map((users) => {
+    map((actions) => {
       const model = new TableModel()
       model.header = headers
       let data: TableRow[] = []
-      for (const user of users) {
+      for (const action of actions) {
         data = [
           ...data,
           new TableRow(
-            new TableItem({ data: user.id }),
-            new TableItem({ data: user.name }),
-            new TableItem({ data: user.email })
+            new TableItem({ data: action.id }),
+            new TableItem({ data: action.name }),
+            new TableItem({ data: action.secure })
           ),
         ]
       }

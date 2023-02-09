@@ -20,6 +20,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/actions/actions.module'),
   },
   {
+    path: 'groups',
+    canActivate: [haveEitherActions({ actions: actions.GROUPS })],
+    loadChildren: () => import('./modules/groups/groups.module'),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },

@@ -19,6 +19,13 @@ export const actions = {
     'iam.action.update',
     'iam.action.delete',
   ],
+  GROUPS: [
+    'iam.group.add',
+    'iam.group.get',
+    'iam.group.list',
+    'iam.group.update',
+    'iam.group.delete',
+  ],
 }
 
 export function getAllAvailableActions(): string[] {

@@ -4,17 +4,16 @@ import {
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data'
 
-export interface Action {
+export interface Group {
   id: string
   name: string
-  secure: boolean
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class ActionService extends EntityCollectionServiceBase<Action> {
+export class GroupsService extends EntityCollectionServiceBase<Group> {
   constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-    super('Action', serviceElementsFactory)
+    super('Group', serviceElementsFactory)
   }
 }
