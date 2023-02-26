@@ -27,13 +27,24 @@ export const actions = {
     'iam.group.delete',
   ],
   APP: [
-    'iam.app.add',
-    'iam.app.get',
-    'iam.app.list',
-    'iam.app.update',
-    'iam.app.delete',
+    'iam.apps.create',
+    'iam.apps.get',
+    'iam.apps.list',
+    'iam.apps.update',
+    'iam.apps.delete',
+  ],
+  MATHCOMPETITION: [
+    'mathcompetition.admin', // order, time change
+    'mathcompetition.problems', // add/edit/delete problem
   ],
 }
+
+export const iamActions = [
+  ...actions.ACTIONS,
+  ...actions.APP,
+  ...actions.USERS,
+  ...actions.GROUPS,
+]
 
 export function getAllAvailableActions(): string[] {
   const a: string[] = []

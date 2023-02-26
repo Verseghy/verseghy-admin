@@ -23,35 +23,80 @@
       <svg ibmIcon="user" size="16" icon></svg>
       <ibm-sidenav-item
         *ngIf="haveEitherAction({ actions: actions.USERS }) | async"
-        [route]="['/admin/users']"
+        [route]="['/admin/iam/users']"
         [active]="(url$ | async) === '/admin/users'"
       >
-        <svg ibmIcon="user" size="16"></svg>
         <ng-container i18n>Users</ng-container>
       </ibm-sidenav-item>
       <ibm-sidenav-item
         *ngIf="haveEitherAction({ actions: actions.ACTIONS }) | async"
-        [route]="['/admin/actions']"
+        [route]="['/admin/iam/actions']"
         [active]="(url$ | async) === '/admin/actions'"
       >
-        <svg ibmIcon="interactions" size="16"></svg>
         <ng-container i18n>Actions</ng-container>
       </ibm-sidenav-item>
       <ibm-sidenav-item
         *ngIf="haveEitherAction({ actions: actions.GROUPS }) | async"
-        [route]="['/admin/groups']"
+        [route]="['/admin/iam/groups']"
         [active]="(url$ | async) === '/admin/groups'"
       >
-        <svg ibmIcon="group" size="16"></svg>
         <ng-container i18n>Groups</ng-container>
       </ibm-sidenav-item>
       <ibm-sidenav-item
         *ngIf="haveEitherAction({ actions: actions.APP }) | async"
-        [route]="['/admin/apps']"
+        [route]="['/admin/iam/apps']"
         [active]="(url$ | async) === '/admin/apps'"
       >
-        <svg ibmIcon="application" size="16"></svg>
         <ng-container i18n>Apps</ng-container>
+      </ibm-sidenav-item>
+    </ibm-sidenav-menu>
+    <ibm-sidenav-menu
+      *ngIf="haveEitherAction({ actions: actions.MATHCOMPETITION }) | async"
+      title="Math Competition"
+    >
+      <svg ibmIcon="angle" size="16" icon></svg>
+      <ibm-sidenav-item
+        *ngIf="
+          haveEitherAction({ actions: ['mathcompetition.problems'] }) | async
+        "
+        [route]="['/admin/math/problems']"
+        [active]="(url$ | async) === '/admin/math/problems'"
+      >
+        <ng-container i18n>Problems</ng-container>
+      </ibm-sidenav-item>
+      <ibm-sidenav-item
+        *ngIf="
+          haveEitherAction({ actions: ['mathcompetition.problems'] }) | async
+        "
+        [route]="['/admin/math/teams']"
+        [active]="(url$ | async) === '/admin/math/teams'"
+      >
+        <ng-container i18n>Teams</ng-container>
+      </ibm-sidenav-item>
+      <ibm-sidenav-item
+        *ngIf="
+          haveEitherAction({ actions: ['mathcompetition.problems'] }) | async
+        "
+        [route]="['/admin/math/users']"
+        [active]="(url$ | async) === '/admin/math/users'"
+      >
+        <ng-container i18n>Users</ng-container>
+      </ibm-sidenav-item>
+      <ibm-sidenav-item
+        *ngIf="haveEitherAction({ actions: ['mathcompetition.admin'] }) | async"
+        [route]="['/admin/math/time']"
+        [active]="(url$ | async) === '/admin/math/time'"
+      >
+        <ng-container i18n>Time Settings</ng-container>
+      </ibm-sidenav-item>
+      <ibm-sidenav-item
+        *ngIf="
+          haveEitherAction({ actions: ['mathcompetition.problems'] }) | async
+        "
+        [route]="['/admin/math/results']"
+        [active]="(url$ | async) === '/admin/math/results'"
+      >
+        <ng-container i18n>Results</ng-container>
       </ibm-sidenav-item>
     </ibm-sidenav-menu>
   </ibm-sidenav>

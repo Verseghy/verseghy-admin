@@ -3,15 +3,13 @@ import { IconService } from 'carbon-components-angular'
 import {
   User16,
   Dashboard16,
-  Interactions16,
-  Group16,
-  Application16,
+  WatsonHealthAngle16,
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
 } from '@carbon/icons'
 import { NavigationEnd, Router } from '@angular/router'
 import { filter, map, mergeWith, Observable, of } from 'rxjs'
-import { actions } from '../../models/actions'
+import { actions, iamActions } from "../../models/actions";
 import { HaveActionService } from '../../services/have-action.service'
 
 @Component({
@@ -31,12 +29,7 @@ export class FullComponent {
     )
   )
   actions = actions
-  iamActions = [
-    ...actions.ACTIONS,
-    ...actions.APP,
-    ...actions.USERS,
-    ...actions.GROUPS,
-  ]
+  iamActions = iamActions
 
   constructor(
     private iconService: IconService,
@@ -46,9 +39,7 @@ export class FullComponent {
     this.iconService.registerAll([
       User16,
       Dashboard16,
-      Interactions16,
-      Group16,
-      Application16,
+      WatsonHealthAngle16,
     ])
   }
 
