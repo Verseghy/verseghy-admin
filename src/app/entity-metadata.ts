@@ -5,6 +5,7 @@ const entityMetadata: EntityMetadataMap = {
   Action: {},
   Group: {},
   App: {},
+  'Math-Problem': {},
 }
 
 const pluralNames = {}

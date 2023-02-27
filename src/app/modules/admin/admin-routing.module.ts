@@ -15,6 +15,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/iam/iam.module'),
   },
   {
+    path: 'math',
+    canActivate: [haveEitherActions({ actions: actions.MATHCOMPETITION })],
+    loadChildren: () => import('./modules/math/math.module'),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },

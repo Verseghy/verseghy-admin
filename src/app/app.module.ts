@@ -6,10 +6,10 @@ import { AppComponent } from './app.component'
 import {
   HeaderModule,
   IconModule,
-  InputModule,
+  InputModule, PlaceholderModule,
   SideNavModule,
-  ThemeModule,
-} from 'carbon-components-angular'
+  ThemeModule
+} from "carbon-components-angular";
 import { EmptyComponent } from './layouts/empty/empty.component'
 import { FullComponent } from './layouts/full/full.component'
 import { NotFoundComponent } from './components/not-found/not-found.component'
@@ -45,6 +45,7 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
     IconModule,
     SideNavModule,
     EntityDataModule.forRoot(entityConfig),
+    PlaceholderModule
   ],
   providers: [
     { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },

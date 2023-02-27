@@ -1,0 +1,34 @@
+<ibm-modal size="lg" [open]="true" (overlaySelected)="closeModal()">
+  <ibm-modal-header (closeSelect)="closeModal()">
+    <h2 ibmModalHeaderLabel>Label</h2>
+    <h3 ibmModalHeaderHeading>Modal</h3>
+  </ibm-modal-header>
+  <section ibmModalContent [hasForm]="true">
+    <h1
+      ibmModalContentText
+      class="bx--modal-content__regular-content modal-text"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis finibus erat
+      vel aliquam sodales. Phasellus porta velit vel libero pulvinar, sit amet
+      semper purus volutpat.
+    </h1>
+    <div class="bx--text-input__field-wrapper">
+      <ibm-label helperText="Helper text">
+        Label
+        <input ibmText placeholder="Placeholder" [autocomplete]="false" />
+      </ibm-label>
+    </div>
+  </section>
+  <ibm-modal-footer>
+    <button class="bx--btn bx--btn--secondary" (click)="closeModal()">
+      Show secondary modal
+    </button>
+    <button
+      class="bx--btn bx--btn--primary"
+      modal-primary-focus
+      (click)="closeModal()"
+    >
+      Close
+    </button>
+  </ibm-modal-footer>
+</ibm-modal>
