@@ -1,34 +1,42 @@
 <ibm-modal size="lg" [open]="true" (overlaySelected)="closeModal()">
   <ibm-modal-header (closeSelect)="closeModal()">
-    <h2 ibmModalHeaderLabel>Label</h2>
-    <h3 ibmModalHeaderHeading>Modal</h3>
+    <h2 ibmModalHeaderLabel i18n>{type, select, add {New} edit {Edit}}</h2>
+    <h3 ibmModalHeaderHeading>Problem</h3>
   </ibm-modal-header>
   <section ibmModalContent [hasForm]="true">
-    <h1
-      ibmModalContentText
-      class="bx--modal-content__regular-content modal-text"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis finibus erat
-      vel aliquam sodales. Phasellus porta velit vel libero pulvinar, sit amet
-      semper purus volutpat.
-    </h1>
-    <div class="bx--text-input__field-wrapper">
-      <ibm-label helperText="Helper text">
-        Label
-        <input ibmText placeholder="Placeholder" [autocomplete]="false" />
+    <form [formGroup]="form">
+      <ibm-label class="mb-4">
+        Problem Body
+        <textarea
+          class="w-full"
+          [rows]="5"
+          ibmTextArea
+          aria-label="textarea"
+          formControlName="body"
+        ></textarea>
       </ibm-label>
-    </div>
+      <ibm-label class="mb-4">
+        Solution
+        <input
+          ibmText
+          aria-label="textarea"
+          type="number"
+          formControlName="solution"
+        />
+      </ibm-label>
+      <ibm-file-uploader
+        title="Upload an image"
+        description="only .jpg and .png files. 500kb max file size."
+        [drop]="true"
+        dropText="Drag and drop an image to upload"
+        [accept]="['image/png', 'image/jpeg']"
+        [multiple]="false"
+        formControlName="image"
+      ></ibm-file-uploader>
+    </form>
   </section>
   <ibm-modal-footer>
-    <button class="bx--btn bx--btn--secondary" (click)="closeModal()">
-      Show secondary modal
-    </button>
-    <button
-      class="bx--btn bx--btn--primary"
-      modal-primary-focus
-      (click)="closeModal()"
-    >
-      Close
-    </button>
+    <button ibmButton="primary" (click)="submit()">Save</button>
+    <button ibmButton="secondary" (click)="closeModal()">Close</button>
   </ibm-modal-footer>
 </ibm-modal>

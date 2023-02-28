@@ -7,7 +7,7 @@ import {
 export interface Problem {
   id: string
   body: string
-  solution: string
+  solution: number
   image?: string
 }
 

@@ -12,7 +12,7 @@ import {
 import { TrashCan16 } from '@carbon/icons'
 import { map } from 'rxjs'
 import { ProblemService } from '../../services/problem.service'
-import { AddEditComponent } from '../add-edit/add-edit.component'
+import { AddEditComponent, ModalType } from "../add-edit/add-edit.component";
 
 const headers = [
   new TableHeaderItem({ data: $localize`ID` }),
@@ -55,12 +55,16 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.problemService.getAll()
+    this.addButton() // TODO: remove this
   }
 
   addButton() {
     this.modalService.create({
       component: AddEditComponent,
-      inputs: {},
+      inputs: {
+        type: ModalType.ModalTypeEdit,
+        editID: "1ab4dabc-2661-4948-9833-68fe3a411aec",
+      },
     })
   }
 }
