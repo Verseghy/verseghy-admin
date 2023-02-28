@@ -12,8 +12,15 @@
     </button>
   </ibm-table-toolbar-content>
 </ibm-table-toolbar>
-<ibm-table [model]="(model$ | async) ?? emptyTableModel">
-  <tbody>
+<ibm-table
+  [model]="
+    (loaded$ | async) === false
+      ? emptyTableModel
+      : (model$ | async) ?? emptyTableModel
+  "
+  [skeleton]="(loaded$ | async) === false"
+>
+  <tbody *ngIf="loaded$ | async">
     <tr>
       <td colspan="4"><div class="text-center" i18n>No data</div></td>
     </tr>

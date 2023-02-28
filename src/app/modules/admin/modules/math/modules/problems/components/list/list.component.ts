@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core'
 import {
   IconService,
-  ModalService,
+  ModalService, Table,
   TableHeaderItem,
   TableItem,
   TableModel,
-  TableRow,
-} from 'carbon-components-angular'
+  TableRow
+} from "carbon-components-angular";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { TrashCan16 } from '@carbon/icons'
@@ -25,7 +25,8 @@ const headers = [
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  emptyTableModel = new TableModel()
+  emptyTableModel = Table.skeletonModel(10, 2)
+  loaded$ = this.problemService.loaded$
   model$ = this.problemService.entities$.pipe(
     map((problems) => {
       const model = new TableModel()
@@ -55,15 +56,21 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.problemService.getAll()
-    this.addButton() // TODO: remove this
+    /*this.modalService.create({
+      component: AddEditComponent,
+      inputs: {
+        type: ModalType.ModalTypeEdit,
+        editID: "34a3d868-d5fb-4a05-bb18-2f0937f36f4a",
+      },
+    })*/
   }
 
   addButton() {
     this.modalService.create({
       component: AddEditComponent,
       inputs: {
-        type: ModalType.ModalTypeEdit,
-        editID: "1ab4dabc-2661-4948-9833-68fe3a411aec",
+        type: ModalType.ModalTypeAdd,
+        editID: undefined,
       },
     })
   }

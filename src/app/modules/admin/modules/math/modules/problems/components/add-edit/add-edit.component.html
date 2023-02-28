@@ -13,6 +13,7 @@
           ibmTextArea
           aria-label="textarea"
           formControlName="body"
+          [skeleton]="!loaded"
         ></textarea>
       </ibm-label>
       <ibm-label class="mb-4">
@@ -22,6 +23,7 @@
           aria-label="textarea"
           type="number"
           formControlName="solution"
+          [skeleton]="!loaded"
         />
       </ibm-label>
       <ibm-file-uploader
@@ -32,6 +34,7 @@
         [accept]="['image/png', 'image/jpeg']"
         [multiple]="false"
         formControlName="image"
+        [skeleton]="!loaded"
       ></ibm-file-uploader>
     </form>
   </section>

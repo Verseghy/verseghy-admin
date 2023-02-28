@@ -3,6 +3,7 @@ import { BaseModal, FileItem } from 'carbon-components-angular'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ProblemService } from '../../services/problem.service'
 import { Buffer } from 'buffer'
+import { tap } from "rxjs";
 
 export enum ModalType {
   ModalTypeAdd = 'add',
@@ -22,6 +23,7 @@ export class AddEditComponent extends BaseModal {
     ]),
     image: new FormControl(new Set<FileItem>()),
   })
+  loaded = false
 
   constructor(
     @Inject('type') public type: ModalType,
@@ -30,24 +32,23 @@ export class AddEditComponent extends BaseModal {
   ) {
     super()
     if (editID) {
-      this.problemService.getByKey(editID).subscribe(
-        (data) => {
-          this.form.controls['body'].setValue(data.body)
-          this.form.controls['solution'].setValue(data.solution)
-          this.form.controls['image'].setValue(
-            new Set([
-              {
-                state: 'edit',
-                uploaded: true,
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                file: this.dataUrlToFile(data.image, 'uploaded')!,
-              },
-            ])
-          )
-        },
-        console.log,
-        () => {console.log('finished')}
-      )
+      this.problemService.getByKey(editID).subscribe((data) => {
+        this.loaded = true
+        this.form.controls['body'].setValue(data.body)
+        this.form.controls['solution'].setValue(data.solution)
+        this.form.controls['image'].setValue(
+          new Set([
+            {
+              state: 'edit',
+              uploaded: true,
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              file: this.dataUrlToFile(data.image, 'uploaded')!,
+            },
+          ])
+        )
+      })
+    } else {
+      this.loaded = true
     }
   }
 
@@ -90,6 +91,8 @@ export class AddEditComponent extends BaseModal {
           Array.from(this.form.controls['image'].value ?? [])[0]?.file
         )) ?? undefined,
     }
-    this.problemService.add(req, { isOptimistic: false })
+    this.problemService
+      .add(req, { isOptimistic: false })
+      .subscribe({ next: () => this.closeModal(), error: console.log })
   }
 }
