@@ -7,8 +7,8 @@ import {
   MathDataService,
   mathDataServiceFactory,
 } from './services/math-data-service.service'
-import { Problem } from './modules/problems/services/problem.service'
 import { HttpClient } from '@angular/common/http'
+import { Problem } from './modules/problems/models/problem'
 
 @NgModule({
   declarations: [],

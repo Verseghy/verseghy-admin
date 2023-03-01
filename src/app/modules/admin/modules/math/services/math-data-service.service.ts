@@ -5,9 +5,10 @@ import {
   HttpUrlGenerator,
 } from '@ngrx/data'
 import { HttpClient } from '@angular/common/http'
+import { environment } from '../../../../../../environment/environment'
 
 const defaultDataConfig: DefaultDataServiceConfig = {
-  root: 'http://localhost:3002/',
+  root: environment.baseMathcompetitionURL,
 }
 
 export const mathDataServiceFactory =
@@ -23,8 +24,8 @@ export class MathDataService<T> extends DefaultDataService<T> {
   ) {
     httpUrlGenerator.registerHttpResourceUrls({
       'Math-Problem': {
-        entityResourceUrl: `${defaultDataConfig.root}problem/`,
-        collectionResourceUrl: `${defaultDataConfig.root}problem/`,
+        entityResourceUrl: `${defaultDataConfig.root}/problem/`,
+        collectionResourceUrl: `${defaultDataConfig.root}/problem/`,
       },
     })
     super(entityName, http, httpUrlGenerator, defaultDataConfig)

@@ -19,6 +19,7 @@
       : (model$ | async) ?? emptyTableModel
   "
   [skeleton]="(loaded$ | async) === false"
+  [showSelectionColumn]="false"
 >
   <tbody *ngIf="loaded$ | async">
     <tr>
@@ -26,3 +27,14 @@
     </tr>
   </tbody>
 </ibm-table>
+
+<ng-template #overflowMenuItemTemplate let-data="data">
+  <ibm-overflow-menu>
+    <ibm-overflow-menu-option (click)="editButton(data)"
+      >Edit</ibm-overflow-menu-option
+    >
+    <ibm-overflow-menu-option type="danger" (click)="deleteButton(data)"
+      >Delete</ibm-overflow-menu-option
+    >
+  </ibm-overflow-menu>
+</ng-template>

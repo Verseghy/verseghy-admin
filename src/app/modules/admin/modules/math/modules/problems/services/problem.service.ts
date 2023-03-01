@@ -3,13 +3,7 @@ import {
   EntityCollectionServiceBase,
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data'
-
-export interface Problem {
-  id: string
-  body: string
-  solution: number
-  image?: string
-}
+import { Problem } from '../models/problem'
 
 @Injectable({
   providedIn: 'root',

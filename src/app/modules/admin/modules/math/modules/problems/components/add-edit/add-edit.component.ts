@@ -3,7 +3,6 @@ import { BaseModal, FileItem } from 'carbon-components-angular'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ProblemService } from '../../services/problem.service'
 import { Buffer } from 'buffer'
-import { tap } from "rxjs";
 
 export enum ModalType {
   ModalTypeAdd = 'add',
@@ -84,6 +83,7 @@ export class AddEditComponent extends BaseModal {
 
   async submit() {
     const req = {
+      id: this.editID ?? undefined,
       body: this.form.controls['body'].value ?? undefined,
       solution: this.form.controls['solution'].value ?? undefined,
       image:
@@ -91,8 +91,17 @@ export class AddEditComponent extends BaseModal {
           Array.from(this.form.controls['image'].value ?? [])[0]?.file
         )) ?? undefined,
     }
-    this.problemService
-      .add(req, { isOptimistic: false })
-      .subscribe({ next: () => this.closeModal(), error: console.log })
+    switch (this.type) {
+      case ModalType.ModalTypeAdd:
+        this.problemService
+          .add(req, { isOptimistic: false })
+          .subscribe({ next: () => this.closeModal(), error: console.log })
+        break
+      case ModalType.ModalTypeEdit:
+        this.problemService
+          .update(req, { isOptimistic: false })
+          .subscribe({ next: () => this.closeModal(), error: console.log })
+        break
+    }
   }
 }

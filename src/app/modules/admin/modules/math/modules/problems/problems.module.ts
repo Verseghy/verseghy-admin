@@ -5,6 +5,7 @@ import { ProblemsRoutingModule } from './problems-routing.module'
 import { ListComponent } from './components/list/list.component'
 import {
   ButtonModule,
+  DialogModule,
   FileUploaderModule,
   IconModule,
   InputModule,
@@ -26,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms'
     InputModule,
     FileUploaderModule,
     ReactiveFormsModule,
+    DialogModule,
   ],
 })
 export default class ProblemsModule {}

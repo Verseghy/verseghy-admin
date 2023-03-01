@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import {
   IconService,
-  ModalService, Table,
+  ModalService,
+  Table,
   TableHeaderItem,
   TableItem,
   TableModel,
-  TableRow
-} from "carbon-components-angular";
+  TableRow,
+} from 'carbon-components-angular'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { TrashCan16 } from '@carbon/icons'
 import { map } from 'rxjs'
 import { ProblemService } from '../../services/problem.service'
-import { AddEditComponent, ModalType } from "../add-edit/add-edit.component";
+import { AddEditComponent, ModalType } from '../add-edit/add-edit.component'
 
 const headers = [
   new TableHeaderItem({ data: $localize`ID` }),
   new TableHeaderItem({ data: $localize`Body` }),
+  new TableHeaderItem({ data: $localize`Actions` }),
 ]
 
 @Component({
@@ -37,7 +39,11 @@ export class ListComponent implements OnInit {
           ...data,
           new TableRow(
             new TableItem({ data: problem.id }),
-            new TableItem({ data: problem.body })
+            new TableItem({ data: problem.body }),
+            new TableItem({
+              data: problem.id,
+              template: this.overflowMenuItemTemplate,
+            })
           ),
         ]
       }
@@ -56,13 +62,6 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.problemService.getAll()
-    /*this.modalService.create({
-      component: AddEditComponent,
-      inputs: {
-        type: ModalType.ModalTypeEdit,
-        editID: "34a3d868-d5fb-4a05-bb18-2f0937f36f4a",
-      },
-    })*/
   }
 
   addButton() {
@@ -73,5 +72,22 @@ export class ListComponent implements OnInit {
         editID: undefined,
       },
     })
+  }
+
+  @ViewChild('overflowMenuItemTemplate', { static: false })
+  protected overflowMenuItemTemplate!: TemplateRef<never>
+
+  editButton(id: string) {
+    this.modalService.create({
+      component: AddEditComponent,
+      inputs: {
+        type: ModalType.ModalTypeEdit,
+        editID: id,
+      },
+    })
+  }
+
+  deleteButton(id: string) {
+    this.problemService.delete(id)
   }
 }
