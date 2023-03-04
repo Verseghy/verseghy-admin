@@ -35,16 +35,18 @@ export class AddEditComponent extends BaseModal {
         this.loaded = true
         this.form.controls['body'].setValue(data.body)
         this.form.controls['solution'].setValue(data.solution)
-        this.form.controls['image'].setValue(
-          new Set([
-            {
-              state: 'edit',
-              uploaded: true,
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              file: this.dataUrlToFile(data.image, 'uploaded')!,
-            },
-          ])
-        )
+        if (data.image) {
+          this.form.controls['image'].setValue(
+            new Set([
+              {
+                state: 'edit',
+                uploaded: true,
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                file: this.dataUrlToFile(data.image, 'uploaded')!,
+              },
+            ])
+          )
+        }
       })
     } else {
       this.loaded = true
