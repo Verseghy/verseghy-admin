@@ -5,14 +5,17 @@ import { ProblemsRoutingModule } from './problems-routing.module'
 import { ListComponent } from './components/list/list.component'
 import {
   ButtonModule,
+  CheckboxModule,
   DialogModule,
-  FileUploaderModule, GridModule,
-  IconModule, InlineLoadingModule,
+  FileUploaderModule,
+  GridModule,
+  IconModule,
+  InlineLoadingModule,
   InputModule,
   ModalModule,
   TableModule,
-  TilesModule
-} from "carbon-components-angular";
+  TilesModule,
+} from 'carbon-components-angular'
 import { AddEditComponent } from './components/add-edit/add-edit.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { KatexModule } from 'ng-katex'
@@ -33,7 +36,8 @@ import { KatexModule } from 'ng-katex'
     TilesModule,
     KatexModule,
     GridModule,
-    InlineLoadingModule
-  ]
+    InlineLoadingModule,
+    CheckboxModule,
+  ],
 })
 export default class ProblemsModule {}

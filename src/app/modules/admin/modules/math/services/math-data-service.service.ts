@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core'
 import {
   DefaultDataService,
   DefaultDataServiceConfig,
@@ -7,7 +6,7 @@ import {
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../../../environment/environment'
 
-const defaultDataConfig: DefaultDataServiceConfig = {
+export const defaultDataConfig: DefaultDataServiceConfig = {
   root: environment.baseMathcompetitionURL,
 }
 

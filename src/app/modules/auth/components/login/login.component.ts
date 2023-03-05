@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Component } from '@angular/core'
 import { ComponentStore, tapResponse } from '@ngrx/component-store'
 import { FormControl, FormGroup } from '@angular/forms'
 import { exhaustMap, map, Observable, switchMap, tap } from 'rxjs'
@@ -19,7 +19,6 @@ interface State {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   providers: [ComponentStore],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
   readonly form = new FormGroup({

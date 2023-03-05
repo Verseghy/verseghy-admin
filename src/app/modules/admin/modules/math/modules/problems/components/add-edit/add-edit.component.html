@@ -5,6 +5,37 @@
   </ibm-modal-header>
   <section ibmModalContent [hasForm]="true">
     <form [formGroup]="form">
+      <div *ngIf="type === 'edit'" class="mb-4">
+        <ibm-checkbox
+          [disabled]="!orderLoaded"
+          (checkedChange)="selectedForCompetitionChange($event)"
+          [checked]="currentlyInOrder > -1"
+        >
+          Selected for the competition
+        </ibm-checkbox>
+        <div *ngIf="currentlyInOrder > -1">
+          <p>Current order: {{ currentlyInOrder + 1 }}</p>
+          <button
+            ibmButton="tertiary"
+            size="sm"
+            [iconOnly]="true"
+            [disabled]="!orderLoaded || (orderHighest$ | async)"
+            (click)="swapOrder(true)"
+          >
+            <svg ibmIcon="arrow--up" size="16"></svg>
+          </button>
+          <button
+            ibmButton="tertiary"
+            size="sm"
+            [iconOnly]="true"
+            [disabled]="!orderLoaded || (orderLowest$ | async)"
+            (click)="swapOrder(false)"
+          >
+            <svg ibmIcon="arrow--down" size="16"></svg>
+          </button>
+        </div>
+      </div>
+
       <ibm-label class="mb-4">
         Problem Body
         <textarea

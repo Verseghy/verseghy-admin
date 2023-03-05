@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Component } from '@angular/core'
 import { IconService } from 'carbon-components-angular'
 import {
   User16,
@@ -9,14 +9,13 @@ import {
 } from '@carbon/icons'
 import { NavigationEnd, Router } from '@angular/router'
 import { filter, map, mergeWith, Observable, of } from 'rxjs'
-import { actions, iamActions } from "../../models/actions";
+import { actions, iamActions } from '../../models/actions'
 import { HaveActionService } from '../../services/have-action.service'
 
 @Component({
   selector: 'app-full',
   templateUrl: './full.component.html',
   styleUrls: ['./full.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FullComponent {
   hamburgerActive = false
@@ -36,11 +35,7 @@ export class FullComponent {
     private router: Router,
     private haveAction: HaveActionService
   ) {
-    this.iconService.registerAll([
-      User16,
-      Dashboard16,
-      WatsonHealthAngle16,
-    ])
+    this.iconService.registerAll([User16, Dashboard16, WatsonHealthAngle16])
   }
 
   logout() {

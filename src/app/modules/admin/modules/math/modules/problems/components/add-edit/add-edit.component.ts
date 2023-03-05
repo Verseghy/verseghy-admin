@@ -1,8 +1,17 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core'
-import { BaseModal, FileItem } from 'carbon-components-angular'
+import { Component, Inject } from '@angular/core'
+import { BaseModal, FileItem, IconService } from 'carbon-components-angular'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ProblemService } from '../../services/problem.service'
 import { Buffer } from 'buffer'
+import {
+  ArrowUp16,
+  ArrowDown16,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+} from '@carbon/icons'
+import { ProblemOrderService } from '../../services/problem-order.service'
+import { BehaviorSubject, map, Subject } from 'rxjs'
+import { ProblemOrder } from '../../models/problem-order'
 
 export enum ModalType {
   ModalTypeAdd = 'add',
@@ -23,14 +32,28 @@ export class AddEditComponent extends BaseModal {
     image: new FormControl(new Set<FileItem>()),
   })
   editLoaded = false
+  orderLoaded = false
+  currentlyInOrder = -1
   saveLoading$ = this.problemService.loading$
+  orderList$ = new BehaviorSubject<ProblemOrder>([])
+  orderLowest$ = this.orderList$
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    .pipe(map((data) => data.indexOf(this.editID!) == 0))
+  orderHighest$ = this.orderList$
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    .pipe(map((data) => data.indexOf(this.editID!) == data.length - 1))
 
   constructor(
     @Inject('type') public type: ModalType,
     @Inject('editID') private editID: string | undefined,
-    private problemService: ProblemService
+    @Inject('orderUpdateRequired$') private orderUpdateRequired$: Subject<void>,
+    private problemService: ProblemService,
+    private problemOrderService: ProblemOrderService,
+    private iconService: IconService
   ) {
     super()
+    this.iconService.registerAll([ArrowUp16, ArrowDown16])
+
     if (editID) {
       this.problemService.getByKey(editID).subscribe((data) => {
         this.editLoaded = true
@@ -48,6 +71,8 @@ export class AddEditComponent extends BaseModal {
             ])
           )
         }
+
+        this.updateOrder(false)
       })
     } else {
       this.editLoaded = true
@@ -111,5 +136,62 @@ export class AddEditComponent extends BaseModal {
           .subscribe({ next: () => this.closeModal(), error: console.log })
         break
     }
+  }
+
+  selectedForCompetitionChange(state: boolean) {
+    if (this.currentlyInOrder === -1 && state) {
+      this.orderLoaded = false
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      this.problemOrderService.add(this.editID!).subscribe({
+        next: () => this.updateOrder(true),
+        error: console.log,
+      })
+    }
+
+    if (this.currentlyInOrder > -1 && !state) {
+      this.orderLoaded = false
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      this.problemOrderService.delete(this.editID!).subscribe({
+        next: () => this.updateOrder(true),
+        error: console.log,
+      })
+    }
+  }
+
+  updateOrder(emitUpdate: boolean) {
+    this.problemOrderService.list().subscribe((data) => {
+      this.orderList$.next(data)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      this.currentlyInOrder = data.indexOf(this.editID!)
+      this.orderLoaded = true
+    })
+
+    if (emitUpdate) {
+      this.orderUpdateRequired$.next()
+    }
+  }
+
+  swapOrder(up: boolean) {
+    this.orderLoaded = false
+
+    this.problemOrderService.list().subscribe((data) => {
+      if (up) {
+        this.problemOrderService
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          .swap(this.editID!, data[data.indexOf(this.editID!) + 1])
+          .subscribe({
+            next: () => this.updateOrder(true),
+            error: console.log,
+          })
+      } else {
+        this.problemOrderService
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          .swap(this.editID!, data[data.indexOf(this.editID!) - 1])
+          .subscribe({
+            next: () => this.updateOrder(true),
+            error: console.log,
+          })
+      }
+    })
   }
 }
