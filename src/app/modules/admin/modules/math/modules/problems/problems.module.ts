@@ -6,14 +6,16 @@ import { ListComponent } from './components/list/list.component'
 import {
   ButtonModule,
   DialogModule,
-  FileUploaderModule,
-  IconModule,
+  FileUploaderModule, GridModule,
+  IconModule, InlineLoadingModule,
   InputModule,
   ModalModule,
   TableModule,
-} from 'carbon-components-angular'
+  TilesModule
+} from "carbon-components-angular";
 import { AddEditComponent } from './components/add-edit/add-edit.component'
 import { ReactiveFormsModule } from '@angular/forms'
+import { KatexModule } from 'ng-katex'
 
 @NgModule({
   declarations: [ListComponent, AddEditComponent],
@@ -28,6 +30,10 @@ import { ReactiveFormsModule } from '@angular/forms'
     FileUploaderModule,
     ReactiveFormsModule,
     DialogModule,
-  ],
+    TilesModule,
+    KatexModule,
+    GridModule,
+    InlineLoadingModule
+  ]
 })
 export default class ProblemsModule {}

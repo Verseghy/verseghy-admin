@@ -13,9 +13,14 @@
           ibmTextArea
           aria-label="textarea"
           formControlName="body"
-          [skeleton]="!loaded"
+          [skeleton]="!editLoaded"
         ></textarea>
       </ibm-label>
+      <ibm-tile
+        ><ng-katex-paragraph
+          [paragraph]="form.controls.body.value!"
+        ></ng-katex-paragraph
+      ></ibm-tile>
       <ibm-label class="mb-4">
         Solution
         <input
@@ -23,23 +28,46 @@
           aria-label="textarea"
           type="number"
           formControlName="solution"
-          [skeleton]="!loaded"
+          [skeleton]="!editLoaded"
         />
       </ibm-label>
-      <ibm-file-uploader
-        title="Upload an image"
-        description="only .jpg and .png files. 500kb max file size."
-        [drop]="true"
-        dropText="Drag and drop an image to upload"
-        [accept]="['image/png', 'image/jpeg']"
-        [multiple]="false"
-        formControlName="image"
-        [skeleton]="!loaded"
-      ></ibm-file-uploader>
+      <div ibmGrid>
+        <div ibmRow>
+          <div ibmCol [columnNumbers]="{ md: 6, sm: 12 }">
+            <ibm-file-uploader
+              title="Upload an image"
+              description="only .jpg and .png files. 500kb max file size."
+              [drop]="true"
+              dropText="Drag and drop an image to upload"
+              [accept]="['image/png', 'image/jpeg']"
+              [multiple]="false"
+              formControlName="image"
+              [skeleton]="!editLoaded"
+            ></ibm-file-uploader>
+          </div>
+          <div ibmCol [columnNumbers]="{ md: 6, sm: 12 }">Something</div>
+        </div>
+      </div>
     </form>
   </section>
   <ibm-modal-footer>
-    <button ibmButton="primary" (click)="submit()">Save</button>
-    <button ibmButton="secondary" (click)="closeModal()">Close</button>
+    <button
+      ibmButton="primary"
+      (click)="submit()"
+      [disabled]="saveLoading$ | async"
+    >
+      Save
+      <ibm-inline-loading
+        class="ml-2"
+        [state]="(saveLoading$ | async) ? 'active' : 'hidden'"
+      ></ibm-inline-loading>
+    </button>
+    <button
+      ibmButton="secondary"
+      (click)="closeModal()"
+      [disabled]="saveLoading$ | async"
+    >
+      Close
+    </button>
   </ibm-modal-footer>
 </ibm-modal>

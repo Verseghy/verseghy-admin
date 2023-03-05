@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core'
 import { BaseModal, FileItem } from 'carbon-components-angular'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ProblemService } from '../../services/problem.service'
@@ -22,7 +22,8 @@ export class AddEditComponent extends BaseModal {
     ]),
     image: new FormControl(new Set<FileItem>()),
   })
-  loaded = false
+  editLoaded = false
+  saveLoading$ = this.problemService.loading$
 
   constructor(
     @Inject('type') public type: ModalType,
@@ -32,11 +33,11 @@ export class AddEditComponent extends BaseModal {
     super()
     if (editID) {
       this.problemService.getByKey(editID).subscribe((data) => {
-        this.loaded = true
-        this.form.controls['body'].setValue(data.body)
-        this.form.controls['solution'].setValue(data.solution)
+        this.editLoaded = true
+        this.form.controls.body.setValue(data.body)
+        this.form.controls.solution.setValue(data.solution)
         if (data.image) {
-          this.form.controls['image'].setValue(
+          this.form.controls.image.setValue(
             new Set([
               {
                 state: 'edit',
@@ -49,7 +50,7 @@ export class AddEditComponent extends BaseModal {
         }
       })
     } else {
-      this.loaded = true
+      this.editLoaded = true
     }
   }
 
@@ -86,11 +87,11 @@ export class AddEditComponent extends BaseModal {
   async submit() {
     const req = {
       id: this.editID ?? undefined,
-      body: this.form.controls['body'].value ?? undefined,
-      solution: this.form.controls['solution'].value ?? undefined,
+      body: this.form.controls.body.value ?? undefined,
+      solution: this.form.controls.solution.value ?? undefined,
       image:
         (await this.fileToDataUrl(
-          Array.from(this.form.controls['image'].value ?? [])[0]?.file
+          Array.from(this.form.controls.image.value ?? [])[0]?.file
         )) ?? undefined,
     }
     switch (this.type) {
