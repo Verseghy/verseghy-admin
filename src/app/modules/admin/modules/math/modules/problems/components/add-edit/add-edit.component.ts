@@ -72,9 +72,15 @@ export class AddEditComponent extends BaseModal {
     return new File([buff], filename, { type: mime })
   }
 
-  private async fileToDataUrl(file: File | null): Promise<string | null> {
+  private fileToDataURLCache: Map<File, Promise<string>> = new Map()
+  fileToDataUrl(): Promise<string> | null {
+    const file = Array.from(this.form.controls.image.value ?? [])[0]?.file
     if (!file) return null
-    return new Promise((resolve, reject) => {
+    if (this.fileToDataURLCache.has(file)) {
+      return this.fileToDataURLCache.get(file) as Promise<string>
+    }
+    const promise = new Promise<string>((resolve, reject) => {
+      console.log(file)
       const reader = new FileReader()
       reader.onload = () => {
         resolve(reader.result as string)
@@ -82,6 +88,8 @@ export class AddEditComponent extends BaseModal {
       reader.onerror = reject
       reader.readAsDataURL(file)
     })
+    this.fileToDataURLCache.set(file, promise)
+    return promise
   }
 
   async submit() {
@@ -89,10 +97,7 @@ export class AddEditComponent extends BaseModal {
       id: this.editID ?? undefined,
       body: this.form.controls.body.value ?? undefined,
       solution: this.form.controls.solution.value ?? undefined,
-      image:
-        (await this.fileToDataUrl(
-          Array.from(this.form.controls.image.value ?? [])[0]?.file
-        )) ?? undefined,
+      image: (await this.fileToDataUrl()) ?? undefined,
     }
     switch (this.type) {
       case ModalType.ModalTypeAdd:

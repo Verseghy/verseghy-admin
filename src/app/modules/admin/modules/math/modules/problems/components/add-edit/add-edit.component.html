@@ -31,21 +31,26 @@
           [skeleton]="!editLoaded"
         />
       </ibm-label>
-      <div ibmGrid>
-        <div ibmRow>
-          <div ibmCol [columnNumbers]="{ md: 6, sm: 12 }">
-            <ibm-file-uploader
-              title="Upload an image"
-              description="only .jpg and .png files. 500kb max file size."
-              [drop]="true"
-              dropText="Drag and drop an image to upload"
-              [accept]="['image/png', 'image/jpeg']"
-              [multiple]="false"
-              formControlName="image"
-              [skeleton]="!editLoaded"
-            ></ibm-file-uploader>
-          </div>
-          <div ibmCol [columnNumbers]="{ md: 6, sm: 12 }">Something</div>
+      <div ibmGrid [useCssGrid]="true" [fullWidth]="true">
+        <div ibmCol [columnNumbers]="{ lg: 8, md: 8, sm: 4 }">
+          <ibm-file-uploader
+            title="Upload an image"
+            description="only .jpg and .png files. 500kb max file size."
+            [drop]="true"
+            dropText="Drag and drop an image to upload"
+            [accept]="['image/png', 'image/jpeg']"
+            [multiple]="false"
+            formControlName="image"
+            [skeleton]="!editLoaded"
+          ></ibm-file-uploader>
+        </div>
+        <div ibmCol [columnNumbers]="{ lg: 8, md: 8, sm: 4 }">
+          <img
+            class="w-full"
+            *ngIf="fileToDataUrl() | async"
+            [src]="fileToDataUrl() | async"
+            alt=""
+          />
         </div>
       </div>
     </form>
