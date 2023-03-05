@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <ibm-inline-notification
+    *ngIf="error$ | async as error"
+    [notificationObj]="{
+      type: 'error',
+      title: error
+    }"
+    (close)="registerError(null)"
+  >
+    error$
+  </ibm-inline-notification>
+  <ibm-label>
+    <ng-container i18n>Email</ng-container>
+    <input ibmText formControlName="email" />
+  </ibm-label>
+  <ibm-label>
+    <ng-container i18n>Password</ng-container>
+    <input ibmText type="password" formControlName="password" />
+  </ibm-label>
+  <ibm-label>
+    <ng-container i18n>Name</ng-container>
+    <input ibmText formControlName="name" />
+  </ibm-label>
+  <button
+    *ngIf="(loading$ | async) === false"
+    ibmButton="primary"
+    type="submit"
+  >
+    <ng-container i18n>Register</ng-container>
+  </button>
+  <ibm-inline-loading *ngIf="(loading$ | async) === true"></ibm-inline-loading>
+  <div *ngIf="userID !== ''">Successful registration: {{ userID }}</div>
+</form>

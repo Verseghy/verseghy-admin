@@ -10,9 +10,10 @@ import {
   NotificationModule,
 } from 'carbon-components-angular'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { RegisterComponent } from './components/register/register.component'
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

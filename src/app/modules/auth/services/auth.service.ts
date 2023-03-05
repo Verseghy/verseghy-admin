@@ -11,6 +11,15 @@ export interface LoginResponse {
   token: string
 }
 
+export interface RegisterRequest {
+  email: string
+  password: string
+  name: string
+}
+export interface RegisterResponse {
+  id: string
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,6 +29,13 @@ export class AuthService {
   login(req: LoginRequest): Observable<LoginResponse> {
     return this.httpClient.post<LoginResponse>(
       `${environment.baseIAMURL}/v1/users/login`,
+      req
+    )
+  }
+
+  register(req: RegisterRequest): Observable<RegisterResponse> {
+    return this.httpClient.post<RegisterResponse>(
+      `${environment.baseIAMURL}/v1/users/register`,
       req
     )
   }
