@@ -1,4 +1,4 @@
 export const environment = {
-  baseIAMURL: 'http://10.0.1.0:3001',
-  baseMathcompetitionURL: 'http://10.0.1.0:3002',
+  baseIAMURL: 'https://iam.verseghy-gimnazium.net',
+  baseMathcompetitionURL: 'https://api.192.verseghy-gimnazium.net',
 }
