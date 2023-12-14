@@ -22,7 +22,7 @@ import { entityConfig } from './entity-metadata'
 import { AuthorizationInterceptor } from './interceptors/authorization.interceptor'
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: 'https://iam.verseghy-gimnazium.net/v1/',
+  root: 'https://iam.193.verseghy-gimnazium.net/v1/',
 }
 
 @NgModule({

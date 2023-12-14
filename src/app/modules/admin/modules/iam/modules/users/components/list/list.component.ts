@@ -10,7 +10,7 @@ import {
 // @ts-ignore
 import { TrashCan16 } from '@carbon/icons'
 import { map } from 'rxjs'
-import { UserService } from '../../services/user.service'
+import { UserService } from '../../../../../../services/user.service'
 
 const headers = [
   new TableHeaderItem({ data: $localize`ID` }),
