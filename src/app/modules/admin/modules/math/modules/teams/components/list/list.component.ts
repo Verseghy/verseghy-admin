@@ -33,7 +33,6 @@ export class ListComponent implements OnInit{
           members: []
         }
         for (let [index2, member] of team.members.entries()) {
-          console.log()
           retTeam.members.push({
             id: member.id,
             "class": member.class,
