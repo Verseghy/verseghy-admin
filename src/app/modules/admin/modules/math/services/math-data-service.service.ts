@@ -26,6 +26,10 @@ export class MathDataService<T> extends DefaultDataService<T> {
         entityResourceUrl: `${defaultDataConfig.root}/problem/`,
         collectionResourceUrl: `${defaultDataConfig.root}/problem/`,
       },
+      'Math-Team': {
+        entityResourceUrl: `${defaultDataConfig.root}/team/`,
+        collectionResourceUrl: `${defaultDataConfig.root}/team/`,
+      },
     })
     super(entityName, http, httpUrlGenerator, defaultDataConfig)
   }

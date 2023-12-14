@@ -1,0 +1,16 @@
+<h1 i18n class="mb-8">Teams</h1>
+<ibm-table
+  [model]="
+    (loaded$ | async) === false
+      ? emptyTableModel
+      : (model$ | async) ?? emptyTableModel
+  "
+  [skeleton]="(loaded$ | async) === false"
+  [showSelectionColumn]="false"
+>
+  <tbody *ngIf="loaded$ | async">
+  <tr>
+    <td colspan="4"><div class="text-center" i18n>No data</div></td>
+  </tr>
+  </tbody>
+</ibm-table>
