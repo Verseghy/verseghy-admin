@@ -1,42 +1,60 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../../../environment/environment";
-import {forkJoin, map} from "rxjs";
+import {combineLatestWith, forkJoin, interval, map} from "rxjs";
+import {TeamService} from "../../../../services/team.service";
+import {SubSink} from "subsink";
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
+  subsink = new SubSink()
   data: any = []
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private teamService: TeamService,
+  ) {
   }
 
   ngOnInit() {
+    this.teamService.getAll()
+
+    this.fetchUpdate()
+    this.subsink.sink = interval(10 * 1000).subscribe(x => this.fetchUpdate())
+  }
+
+  ngOnDestroy() {
+    this.subsink.unsubscribe()
+  }
+
+  fetchUpdate() {
+    console.log("fetching update", new Date())
     let promises = []
-    for (let i = new Date("2023-03-14T13:00:00Z"); i <= new Date("2023-03-14T17:00:00Z"); i.setMinutes(i.getMinutes() + 10)) {
+    for (let i = new Date("2023-12-15T13:00:00Z"); i <= new Date("2023-12-15T17:00:00Z"); i.setMinutes(i.getMinutes() + 10)) {
       let z = new Date(i)
-      /*this.http.post<{correct: number, team_id: string}[]>(`${environment.baseMathcompetitionURL}/stats`, {timestamp: z.toISOString()}).subscribe(x => {
-        for (const y of x) {
-          this.data = [...this.data, {timestamp: z.toISOString(), correct: y.correct, team: y.team_id}]
-        }
-      })*/
       promises.push(this.http.post<{correct: number, team_id: string}[]>(`${environment.baseMathcompetitionURL}/stats`, {timestamp: z.toISOString()}).pipe(
         map(x => ({data: x, timestamp: z}))
       ))
     }
-    forkJoin(promises).subscribe(w => {
-      let data = []
-      for (const timestamp of w) {
-        console.log(timestamp)
-        for (const teams of timestamp.data) {
-          data.push({timestamp: timestamp.timestamp.toISOString(), correct: teams.correct, team: teams.team_id})
-        }
-      }
-      this.data = data
-    })
+    forkJoin(promises)
+      .pipe(
+        combineLatestWith(this.teamService.entities$),
+        map(([w, teamsData]) => {
+          let data = []
+          for (const timestamp of w) {
+            for (const teams of timestamp.data) {
+              data.push({timestamp: timestamp.timestamp.toISOString(), correct: teams.correct, team: teamsData.find(t => t.id == teams.team_id)?.name})
+            }
+          }
+          this.data = data
+          console.log(this.data)
+        })
+      )
+      .subscribe(w => {})
   }
 
   options = {
@@ -57,11 +75,6 @@ export class ListComponent implements OnInit {
       }
     },
     curve: "curveMonotoneX",
-    height: "1000px",
-    zoomBar: {
-      top: {
-        enabled: true
-      }
-    }
+    height: "800px",
   }
 }
