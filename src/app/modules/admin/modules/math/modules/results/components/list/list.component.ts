@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../../../../environment/environment";
-import {combineLatestWith, forkJoin, interval, map} from "rxjs";
+import {combineLatestWith, filter, forkJoin, interval, map} from "rxjs";
 import {TeamService} from "../../../../services/team.service";
 import {SubSink} from "subsink";
 
@@ -47,11 +47,10 @@ export class ListComponent implements OnInit, OnDestroy {
           let data = []
           for (const timestamp of w) {
             for (const teams of timestamp.data) {
-              data.push({timestamp: timestamp.timestamp.toISOString(), correct: teams.correct, team: teamsData.find(t => t.id == teams.team_id)?.name})
+              data.push({timestamp: timestamp.timestamp.toISOString(), correct: teams.correct, team: teamsData.find(t => t.id == teams.team_id)?.name ?? teams.team_id})
             }
           }
           this.data = data
-          console.log(this.data)
         })
       )
       .subscribe(w => {})
