@@ -21,26 +21,26 @@ export class ProblemOrderService {
 
   list(): Observable<ProblemOrder> {
     return this.httpClient.get<ProblemOrder>(
-      `${this.endpointURL}/problem/order`
+      `${this.endpointURL}/v1/problem/order`
     )
   }
 
   add(problemID: string): Observable<void> {
-    return this.httpClient.post<void>(`${this.endpointURL}/problem/order`, {
+    return this.httpClient.post<void>(`${this.endpointURL}/v1/problem/order`, {
       type: OrderRequestType.INSERT,
       id: problemID,
     })
   }
 
   delete(problemID: string): Observable<void> {
-    return this.httpClient.post<void>(`${this.endpointURL}/problem/order`, {
+    return this.httpClient.post<void>(`${this.endpointURL}/v1/problem/order`, {
       type: OrderRequestType.DELETE,
       id: problemID,
     })
   }
 
   swap(id1: string, id2: string): Observable<void> {
-    return this.httpClient.post<void>(`${this.endpointURL}/problem/order`, {
+    return this.httpClient.post<void>(`${this.endpointURL}/v1/problem/order`, {
       type: OrderRequestType.SWAP,
       id1,
       id2,

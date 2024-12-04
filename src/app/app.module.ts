@@ -20,9 +20,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data'
 import { entityConfig } from './entity-metadata'
 import { AuthorizationInterceptor } from './interceptors/authorization.interceptor'
+import {environment} from "../environment/environment";
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: 'https://iam.193.verseghy-gimnazium.net/v1/',
+  root: environment.baseIAMURL,
 }
 
 @NgModule({

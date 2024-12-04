@@ -36,7 +36,7 @@ export class ListComponent implements OnInit, OnDestroy {
     let promises = []
     for (let i = new Date("2023-12-15T13:00:00Z"); i <= new Date("2023-12-15T17:00:00Z"); i.setMinutes(i.getMinutes() + 10)) {
       let z = new Date(i)
-      promises.push(this.http.post<{correct: number, team_id: string}[]>(`${environment.baseMathcompetitionURL}/stats`, {timestamp: z.toISOString()}).pipe(
+      promises.push(this.http.post<{correct: number, team_id: string}[]>(`${environment.baseMathcompetitionURL}/v1/stats`, {timestamp: z.toISOString()}).pipe(
         map(x => ({data: x, timestamp: z}))
       ))
     }
