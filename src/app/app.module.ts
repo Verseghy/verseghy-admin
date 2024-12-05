@@ -23,7 +23,7 @@ import { AuthorizationInterceptor } from './interceptors/authorization.intercept
 import {environment} from "../environment/environment";
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: environment.baseIAMURL,
+  root: new URL('/v1', environment.baseIAMURL).href,
 }
 
 @NgModule({
