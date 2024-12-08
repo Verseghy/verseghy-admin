@@ -1,7 +1,7 @@
 <ibm-modal size="lg" [open]="true" (overlaySelected)="closeModal()">
   <ibm-modal-header (closeSelect)="closeModal()">
     <h2 ibmModalHeaderLabel i18n>{type, select, add {New} edit {Edit}}</h2>
-    <h3 ibmModalHeaderHeading>Team</h3>
+    <h3 ibmModalHeaderHeading>Problem</h3>
   </ibm-modal-header>
   <section ibmModalContent [hasForm]="true">
     <form [formGroup]="form">
@@ -37,7 +37,7 @@
       </div>
 
       <ibm-label class="mb-4">
-        Team Body
+        Problem Body
         <textarea
           class="w-full"
           [rows]="5"
