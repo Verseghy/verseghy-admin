@@ -1,0 +1,11 @@
+<p>Start time: {{ start_date | date: 'yyyy/MM/dd HH:mm:ss' }}</p>
+<p>End time: {{ end_date | date: 'yyyy/MM/dd HH:mm:ss' }}</p>
+<div class="flex">
+  <ibm-date-picker [(ngModel)]="form_start_date" dateFormat="Y/m/d" placeholder="yyyy/mm/dd"></ibm-date-picker>
+  <ibm-timepicker [(ngModel)]="form_start_time"></ibm-timepicker>
+</div>
+<div class="flex">
+  <ibm-date-picker [(ngModel)]="form_end_date" dateFormat="Y/m/d" placeholder="yyyy/mm/dd"></ibm-date-picker>
+  <ibm-timepicker [(ngModel)]="form_end_time"></ibm-timepicker>
+</div>
+<button ibmButton="primary" (click)="submit()">Submit</button>
